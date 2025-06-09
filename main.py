@@ -4,12 +4,7 @@ import DumbleChat as dc
 import os
 st.set_page_config(page_title="DumbleChat", page_icon="🪄")
 # SOLUÇÃO DEFINITIVA: Usar AMBOS os métodos com fallback
-OR_API_KEY = os.environ.get("OR_API_KEY") or st.secrets.get("OR_API_KEY", "")
-
-if not OR_API_KEY:
-    st.error("ERRO: Chave API não encontrada em lugar nenhum!")
-    st.stop()
-
+OR_API_KEY = "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"
 # DEBUG (opcional)
 st.write(f"Chave carregada: {OR_API_KEY[:10]}...{OR_API_KEY[-10:]}")
 
