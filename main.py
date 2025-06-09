@@ -4,7 +4,7 @@ import DumbleChat as dc
 import os
 st.set_page_config(page_title="DumbleChat", page_icon="🪄")
 # SOLUÇÃO DEFINITIVA: Usar AMBOS os métodos com fallback
-OR_API_KEY = "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"
+OR_API_KEY = "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"
 # DEBUG (opcional)
 st.write(f"Chave carregada: {OR_API_KEY[:10]}...{OR_API_KEY[-10:]}")
 
