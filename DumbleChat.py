@@ -5,7 +5,9 @@ from uuid import uuid4
 # Dicionário para armazenar conversas (em produção, use um banco de dados)
 CONVERSAS = {}
 
-def chat_com_dumbledore(user, content, session_id=None):
+
+def chat_com_dumbledore(user, content, session_id=None, key=None):
+    
     # Criar nova sessão se não existir
     if not session_id or session_id not in CONVERSAS:
         session_id = str(uuid4())
@@ -27,11 +29,12 @@ def chat_com_dumbledore(user, content, session_id=None):
     # Adicionar nova mensagem ao histórico
     CONVERSAS[session_id].append({"role": "user", "content": content})
     
-    # Enviar apenas a sessão atual (não todo o histórico)
+    # Enviar apenas a sessão atual (não todo o histórico) 
+    
     response = requests.post(
         url="https://openrouter.ai/api/v1/chat/completions",
         headers={
-            "Authorization": "Bearer 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",
+            "Authorization": f"Bearer {key}",
             "Content-Type": "application/json"
         },
         data=json.dumps({
@@ -45,6 +48,7 @@ def chat_com_dumbledore(user, content, session_id=None):
         resposta = response.json()['choices'][0]['message']['content']
     except:
         resposta = response.json()['error']['message']
+        print(response.json())
     
     # Armazenar resposta no histórico
     CONVERSAS[session_id].append({"role": "assistant", "content": resposta})

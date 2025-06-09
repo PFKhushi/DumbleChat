@@ -1,6 +1,9 @@
 import streamlit as st
 import DumbleChat as dc
 
+OR_API_KEY = st.secrets["OR_API_KEY"]
+
+
 st.set_page_config(page_title="DumbleChat", page_icon="🪄")
 st.title("Dumblechat")
 st.header("Fale com Dumbledore!")
@@ -46,7 +49,8 @@ if nome:
         response, new_sess = dc.chat_com_dumbledore(
             user=nome,
             content=prompt,
-            session_id=st.session_state.session_id
+            session_id=st.session_state.session_id,
+            key=OR_API_KEY
         )
         st.session_state.session_id = new_sess
 
