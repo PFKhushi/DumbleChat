@@ -1,10 +1,19 @@
 import streamlit as st
 import DumbleChat as dc
 
-OR_API_KEY = st.secrets["OR_API_KEY"]
-
-
+import os
 st.set_page_config(page_title="DumbleChat", page_icon="🪄")
+# SOLUÇÃO DEFINITIVA: Usar AMBOS os métodos com fallback
+OR_API_KEY = os.environ.get("OR_API_KEY") or st.secrets.get("OR_API_KEY", "")
+
+if not OR_API_KEY:
+    st.error("ERRO: Chave API não encontrada em lugar nenhum!")
+    st.stop()
+
+# DEBUG (opcional)
+st.write(f"Chave carregada: {OR_API_KEY[:10]}...{OR_API_KEY[-10:]}")
+
+
 st.title("Dumblechat")
 st.header("Fale com Dumbledore!")
 
